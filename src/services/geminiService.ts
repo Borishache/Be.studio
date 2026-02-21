@@ -3,7 +3,7 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
 
 export async function generateMarketingStrategy(businessType: string, goals: string) {
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-2.5-flash";
   const prompt = `As a world-class marketing and UX/UI agency, provide a concise, high-impact marketing and design strategy for a ${businessType} with the following goals: ${goals}. 
   Include:
   1. A unique value proposition.

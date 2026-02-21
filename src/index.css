@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-brand-blue: #0046FD;
+  --color-brand-deep-blue: #011BB7;
+  --color-brand-lime: #BFF532;
+  --color-brand-orange: #FF6826;
+  --color-brand-gray: #E8E8E8;
+  --color-brand-black: #000000;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-brand-black font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-black tracking-tighter;
+  }
+}
+
+.glass-card {
+  @apply bg-white/70 backdrop-blur-md border border-brand-black/5 shadow-sm;
+}
+
+.brutal-card {
+  @apply border-2 border-brand-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}

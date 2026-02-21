@@ -1,8 +1,22 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
+// Inicializamos lazy en caso de que la API key falte (para no tumbar la app en el render inicial)
+let aiClient: GoogleGenAI | null = null;
+const getAIClient = () => {
+  if (!aiClient) {
+    try {
+      aiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "missing-key-for-preview" });
+    } catch (error) {
+      console.warn("Failed to initialize GoogleGenAI", error);
+    }
+  }
+  return aiClient;
+};
 
 export async function generateMarketingStrategy(businessType: string, goals: string) {
+  const ai = getAIClient();
+  if (!ai) return "El asistente táctico no está disponible en este momento por falta de configuración del API Key.";
+
   const model = "gemini-2.5-flash";
   const prompt = `As a world-class marketing and UX/UI agency, provide a concise, high-impact marketing and design strategy for a ${businessType} with the following goals: ${goals}. 
   Include:
